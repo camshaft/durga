@@ -1,0 +1,13 @@
+{application, durga, [
+  {description, "websocket service registry"},
+  {vsn, "0.1.0"},
+  {modules, []},
+  {registered, []},
+  {applications, [
+    kernel,
+    stdlib,
+    cowboy
+  ]},
+  {mod, {durga_app, []}},
+  {env, []}
+]}.
