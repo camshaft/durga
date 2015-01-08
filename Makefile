@@ -13,9 +13,11 @@ dep_cowboy_compiled_router = git https://github.com/camshaft/cowboy_compiled_rou
 dep_rl = git https://github.com/camshaft/rl master
 dep_annex_marshal_msgpack = git https://github.com/annexrpc/annex-marshal-msgpack.git master
 
+default: all bin/start
+
 include erlang.mk
 
-repl: all bin/start
+repl: default
 	@bin/start durga -s rl make
 
 bin/start:
