@@ -53,5 +53,6 @@ handle_call(<<"services">>, <<"register">>, [Url, Title, Type, Module, Method, A
 handle_call(<<"services">>, <<"unregister">>, [Url, Title, Type, Module, Method, Arguments, Response]) ->
   durga_manager:unregister(self(), Url, Title, Type, Module, Method, Arguments, Response),
   {ok, nil};
-handle_call(_, _, _) ->
+handle_call(Mod, Fun, Args) ->
+  io:format("~p:~p(~p)~n", [Mod, Fun, Args]),
   {error, notfound}.

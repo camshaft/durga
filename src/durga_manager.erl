@@ -24,11 +24,11 @@
 start_link() ->
   gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
 
-register(Pid, Title, Url, Type, Module, Method, Arguments, Response) ->
-  gen_server:call(?MODULE, {register, {Pid, {Url, Title, Type, Module, Method, Arguments, Response}}}).
+register(Pid, Env, Url, Type, Module, Method, Arguments, Response) ->
+  gen_server:call(?MODULE, {register, {Pid, {Url, Env, Type, Module, Method, Arguments, Response}}}).
 
-unregister(Pid, Title, Url, Type, Module, Method, Arguments, Response) ->
-  gen_server:call(?MODULE, {unregister, {Pid, {Url, Title, Type, Module, Method, Arguments, Response}}}).
+unregister(Pid, Env, Url, Type, Module, Method, Arguments, Response) ->
+  gen_server:call(?MODULE, {unregister, {Pid, {Url, Env, Type, Module, Method, Arguments, Response}}}).
 
 unregister_all(Pid) ->
   gen_server:call(?MODULE, {unregister_all, Pid}).
@@ -88,10 +88,10 @@ code_change(_OldVersion, _State, _Extra) ->
   {ok, _State}.
 
 format(Tab) ->
-  sets:to_list(sets:from_list(ets:foldl(fun({_, {Url, Title, Type, Module, Method, Arguments, Response}}, Acc) ->
+  sets:to_list(sets:from_list(ets:foldl(fun({_, {Url, Env, Type, Module, Method, Arguments, Response}}, Acc) ->
     [#{
       url => Url,
-      title => Title,
+      env => Env,
       type => Type,
       module => Module,
       method => Method,
