@@ -14,6 +14,7 @@ defmodule Durga.Mixfile do
     [
       mod: { Durga, [] },
       applications: [
+        :gproc,
         :logger,
         :cowboy
       ]
@@ -22,7 +23,9 @@ defmodule Durga.Mixfile do
 
   defp deps do
     [{:cowboy, "~> 1.0.0"},
-     {:gproc, github: "uwiger/gproc", tag: "0.4"},
-     {:simple_env, github: "camshaft/simple_env"},]
+     {:gproc, github: "uwiger/gproc", ref: "0.4"},
+     {:simple_env, github: "camshaft/simple_env"},
+     {:durga_transport, "~> 1.0.0"},
+     {:msgpack, github: "msgpack/msgpack-erlang", ref: "0.3.3"},]
   end
 end
